@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
+import { Keyboard, Platform } from 'react-native';
 
 import styled from '@emotion/native';
 
@@ -21,12 +21,14 @@ export const SearchInput: React.FC<Props> = ({ onTermChange }) => {
 
   useEffect(() => {
     onTermChange(devouncedValue);
+    Keyboard.dismiss();
   }, [devouncedValue]);
 
   return (
     <Wrapper isAndroid={Platform.OS === 'android'}>
       <Icon name="search-outline" size={20} color="red" />
       <StyledTextInput
+        autoFocus
         autoCapitalize="none"
         autoCorrect={false}
         onChangeText={e => setInputValue(e)}
